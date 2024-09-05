@@ -1,0 +1,19 @@
+{
+    "name": "fakermarco",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "nodemon ./index.js",
+        "start": "node ./index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "faker": "^6.6.6"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.4"
+    }
+}
