@@ -1,5 +1,6 @@
 import express from "express";
 import aroundRouter from "./src/around/route.js";
+import aegisData from "./src/Aegis/routesAegis.js"
 import { config } from "dotenv";
 config();
 
@@ -12,6 +13,7 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/around", aroundRouter);
+app.use("/aegis", aegisData);
 
 // Define another route
 // app.get("/api", (req, res) => {
