@@ -6,7 +6,8 @@
     "scripts": {
         "test": "nodemon ./index.js",
         "start": "node ./index.js",
-        "izak": "nodemon ./izak/izak.js"
+        "izakTest": "nodemon ./src/izak/controller.js",
+        "izak": "node ./src/izak/controller.js"
     },
     "author": "",
     "license": "ISC",
