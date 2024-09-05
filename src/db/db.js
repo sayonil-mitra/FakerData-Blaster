@@ -37,6 +37,29 @@ async function getPurgeIds() {
 	return rows;
 }
 
+async function getPurgeId(purgeId) {
+	try {
+		if (!purgeId) {
+			return null;
+		}
+		const db = await dbPromise;
+
+		const record = await db.get(
+			`SELECT purge_id FROM purge_cache WHERE purge_id = ?`,
+			[purgeId]
+		);
+
+		if (!record) {
+			return null;
+		}
+		return purgeId;
+	} catch (error) {
+		console.error("Error finding purgeId:", error);
+		return null;
+	}
+	Id;
+}
+
 async function getFirstPurgeId() {
 	const db = await dbPromise;
 	const firstRow = await db.get(
@@ -99,6 +122,7 @@ export {
 	addPurgeId,
 	getPurgeIds,
 	getFirstPurgeId,
+	getPurgeId,
 	removePurgeId,
 	updatePurgeId,
 	clearCache,

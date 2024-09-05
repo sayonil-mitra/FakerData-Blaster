@@ -3,7 +3,12 @@ import { ingestInSchema } from "../helpers/ingest-data.js";
 import { deleteData } from "../helpers/delete-data.js";
 import { generateData } from "./controller.js";
 import { schemas } from "./schemas.js";
-import { addPurgeId, getFirstPurgeId, removePurgeId } from "../db/db.js";
+import {
+	addPurgeId,
+	getFirstPurgeId,
+	removePurgeId,
+	getPurgeId,
+} from "../db/db.js";
 import { purgeNames } from "../helpers/purge-names.js";
 
 const router = Router();
@@ -100,6 +105,30 @@ const purgeHandler = async (purgeId) => {
 router.post("/purge", async (req, res) => {
 	try {
 		const purgeId = await getFirstPurgeId(purgeNames.AROUND);
+
+		if (!purgeId) {
+			return res.status(404).json({
+				status: false,
+				message: "No purgeId found for around",
+			});
+		}
+
+		const results = await purgeHandler(purgeId);
+
+		await removePurgeId(purgeId);
+
+		return res.json(results);
+	} catch (error) {
+		return res.status(500).json({
+			status: "Failed",
+			errorMessage: error.message,
+		});
+	}
+});
+
+router.post("/purge/:purgeId", async (req, res) => {
+	try {
+		const { purgeId } = req.params;
 
 		if (!purgeId) {
 			return res.status(404).json({
