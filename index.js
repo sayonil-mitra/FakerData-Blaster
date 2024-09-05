@@ -1,5 +1,6 @@
 import express from "express";
 import aroundRouter from "./src/around/route.js";
+import aegisData from "./src/Aegis/routesAegis.js"
 import izakRouter from "./src/izak/route.js";
 import { config } from "dotenv";
 import { initDB } from "./src/db/db.js";
@@ -15,6 +16,7 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/around", aroundRouter);
+app.use("/aegis", aegisData);
 app.use("/izak", izakRouter);
 
 const PORT = process.env.PORT || 3000;
