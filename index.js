@@ -1,6 +1,7 @@
 import express from "express";
-import { test } from "./test.js";
-import { generateData } from "./src/around/route.js";
+import aroundRouter from "./src/around/route.js";
+import { config } from "dotenv";
+config();
 
 // Initialize the Express app
 const app = express();
@@ -10,7 +11,7 @@ app.get("/test", (req, res) => {
 	res.send("service running!");
 });
 
-generateData();
+app.use("/around", aroundRouter);
 
 // Define another route
 // app.get("/api", (req, res) => {
