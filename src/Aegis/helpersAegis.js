@@ -1,5 +1,4 @@
-import { faker } from "../faker/faker.js";
-import { eventNames } from "./event-names.js";
+import { faker ,getRandomNumber} from "../faker/faker.js";
 const incidentType = ["Fire", "Flood", "Earthquake", "Accident", "Robbery"];
 const status = ["Active", "Resolved", "Pending"];
 const severity = ["Low", "Medium", "High"];
@@ -83,10 +82,10 @@ const createCivilian = (incidentId,purgeId) => ({
     date: faker.date.recent().toISOString().split("T")[0], // Date of message
     id: faker.string.uuid(),
     images: {
-        image_url: faker.image.imageUrl(),
+        image_url: faker.image.avatar
     },
     videos: {
-        video_url: faker.image.imageUrl(),
+        video_url: faker.image.avatar
     },
     message_type: faker.random.arrayElement(messageType),
     language: faker.random.arrayElement(language),
@@ -94,7 +93,7 @@ const createCivilian = (incidentId,purgeId) => ({
     purge_id: purgeId
 });
 
-const createNOC = (purgeId,purgeId) => ({
+const createNOC = (purgeId) => ({
 	noc_id: faker.string.uuid(), // Unique ID for NOC
 	noc_name: faker.company.name(), // Random NOC name
 	noc_location: faker.location.city(), // Random city location for NOC
