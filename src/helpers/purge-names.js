@@ -1,3 +1,4 @@
 export const purgeNames = {
-	AROUND: "AROUND",
+  AROUND: "AROUND",
+  IZAK: "IZAK",
 };
