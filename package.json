@@ -5,13 +5,14 @@
     "main": "index.js",
     "scripts": {
         "test": "nodemon ./index.js",
-        "start": "node ./index.js"
+        "start": "node ./index.js",
+        "izak": "nodemon ./izak/izak.js"
     },
     "author": "",
     "license": "ISC",
     "type": "module",
     "dependencies": {
-        "faker": "^6.6.6"
+        "@faker-js/faker": "^9.0.0"
     },
     "devDependencies": {
         "nodemon": "^3.1.4"
