@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { ingestInSchema } from "../helpers/ingest-data.js";
+import { deleteData } from "../helpers/delete-data.js";
 import { generateData } from "./controller.js";
 import { schemas } from "./schemas.js";
-import { addPurgeId } from "../db/db.js";
+import { addPurgeId, getFirstPurgeId, removePurgeId } from "../db/db.js";
 import { purgeNames } from "../helpers/purge-names.js";
 
 const router = Router();
@@ -51,7 +52,65 @@ router.post("/ingest", async (req, res) => {
 		const incrementOnEachLevel =
 			parseInt(req.query.incrementOnEachLevel) || 5;
 
-		const results = ingestHandler(firstLevel, incrementOnEachLevel);
+		const results = await ingestHandler(firstLevel, incrementOnEachLevel);
+
+		res.json(results);
+	} catch (error) {
+		res.status(500).json({
+			status: "Failed",
+			errorMessage: error.message,
+		});
+	}
+});
+
+const purgeHandler = async (purgeId) => {
+	const purgePromises = [];
+	const keys = [...Object.keys(schemas)];
+
+	keys.forEach((key) => {
+		purgePromises.push(deleteData(schemas[key], purgeId));
+	});
+
+	const purgeResponses = await Promise.allSettled(ingestionPromises);
+
+	const results = {
+		success: [],
+		failed: [],
+		purgeId,
+	};
+
+	purgeResponses.forEach((result) => {
+		if (result.status === "fulfilled") {
+			const { status, msg } = result.value.data;
+
+			results.success.push({
+				status,
+				msg,
+			});
+		} else {
+			results.failed.push({
+				error: result.reason,
+			});
+		}
+	});
+
+	return results;
+};
+
+router.post("/purge", async (req, res) => {
+	try {
+		const purgeId = getFirstPurgeId(purgeNames.AROUND);
+
+		if (!purgeId) {
+			res.status(404).json({
+				status: false,
+				message: "No purgeId found for around",
+			});
+		}
+
+		const results = await purgeHandler(purgeId);
+
+		await removePurgeId(purgeId);
 
 		res.json(results);
 	} catch (error) {
