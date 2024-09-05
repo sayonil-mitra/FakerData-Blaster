@@ -37,22 +37,40 @@ async function getPurgeIds() {
 	return rows;
 }
 
-async function removeFirstPurgeId() {
+async function getFirstPurgeId() {
 	const db = await dbPromise;
 	const firstRow = await db.get(
 		`SELECT * FROM purge_cache ORDER BY created_at LIMIT 1`
 	);
 
 	if (firstRow) {
-		await db.run(`DELETE FROM purge_cache WHERE purge_id = ?`, [
-			firstRow.purge_id,
-		]);
-		console.log(
-			`Removed purge ID: ${firstRow.purge_id} for app: ${firstRow.app_name}`
-		);
 		return firstRow.purge_id;
 	} else {
 		console.log("No purge IDs to remove.");
+		return null;
+	}
+}
+
+async function removePurgeId(purgeId) {
+	try {
+		if (!purgeId) {
+			return null;
+		}
+		const db = await dbPromise;
+
+		const record = await db.get(
+			`SELECT purge_id FROM purge_cache WHERE purge_id = ?`,
+			[purgeId]
+		);
+
+		if (!record) {
+			return null;
+		}
+
+		await db.run(`DELETE FROM purge_cache WHERE purge_id = ?`, [purgeId]);
+		return purgeId;
+	} catch (error) {
+		console.error("Error removing purgeId:", error);
 		return null;
 	}
 }
@@ -80,7 +98,8 @@ async function clearCache() {
 export {
 	addPurgeId,
 	getPurgeIds,
-	removeFirstPurgeId,
+	getFirstPurgeId,
+	removePurgeId,
 	updatePurgeId,
 	clearCache,
 	initDB,
