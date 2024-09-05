@@ -13,7 +13,11 @@ import {
 } from "./helpers.js";
 import { getRandomNumber } from "../faker/faker.js";
 
-export function generateData(totalCount = 1000, incrementEachLevel = 5) {
+export function generateData(
+	purgeId,
+	totalCount = 1000,
+	incrementEachLevel = 5
+) {
 	// Initialize data storage
 	const data = {
 		users: [],
@@ -31,23 +35,26 @@ export function generateData(totalCount = 1000, incrementEachLevel = 5) {
 
 	// Step 1: Generate users (Top Level)
 	for (let i = 0; i < totalCount; i++) {
-		const user = createUser();
+		const user = createUser(purgeId);
 		data.users.push(user);
 	}
 
 	// Step 2: Generate locations and Local Authorities
 	for (let i = 0; i < parseInt(totalCount); i++) {
-		const location = createLocation();
-		const authority = createLocalAuthority();
+		const location = createLocation(purgeId);
+		const authority = createLocalAuthority(purgeId);
 		data.locations.push(location);
 		data.localAuthorities.push(authority);
 	}
 
 	// Step 3: Generate businesses and Weather Stations
 	for (let i = 0; i < parseInt(totalCount); i++) {
-		const business = createBusiness();
+		const business = createBusiness(purgeId);
 		const location = data.locations[i];
-		const weatherStation = createWeatherStation(location.location_id);
+		const weatherStation = createWeatherStation(
+			location.location_id,
+			purgeId
+		);
 		data.businesses.push(business);
 		data.weatherStations.push(weatherStation);
 	}
@@ -66,22 +73,28 @@ export function generateData(totalCount = 1000, incrementEachLevel = 5) {
 			const event = createEvent(
 				user.user_id,
 				location.location_id,
-				authority.authority_id
+				authority.authority_id,
+				purgeId
 			);
 			data.events.push(event);
 
 			// Generate alerts
-			const alert = createAlert(user.user_id, authority.authority_id);
+			const alert = createAlert(
+				user.user_id,
+				authority.authority_id,
+				purgeId
+			);
 			data.alerts.push(alert);
 
 			// Generate Event Organizers
-			const organizer = createEventOrganizer(event.event_id);
+			const organizer = createEventOrganizer(event.event_id, purgeId);
 			data.eventOrganizers.push(organizer);
 
 			// Generate Gas Stations
 			const gasStation = createGasStation(
 				user.user_id,
-				location.location_id
+				location.location_id,
+				purgeId
 			);
 			data.gasStations.push(gasStation);
 		}
@@ -90,7 +103,7 @@ export function generateData(totalCount = 1000, incrementEachLevel = 5) {
 	// Step 5: Generate promotions for each Business
 	data.businesses.forEach((business) => {
 		for (let i = 0; i < incrementEachLevel; i++) {
-			const promotion = createPromotion(business.business_id);
+			const promotion = createPromotion(business.business_id, purgeId);
 			data.promotions.push(promotion);
 		}
 	});
@@ -98,7 +111,10 @@ export function generateData(totalCount = 1000, incrementEachLevel = 5) {
 	// Step 6: Generate Weather Reports for each Weather Station (Third Level)
 	data.weatherStations.forEach((station) => {
 		for (let i = 0; i < incrementEachLevel; i++) {
-			const weatherReport = createWeatherReport(station.station_id);
+			const weatherReport = createWeatherReport(
+				station.station_id,
+				purgeId
+			);
 			data.weatherReports.push(weatherReport);
 		}
 	});

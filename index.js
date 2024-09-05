@@ -2,6 +2,7 @@ import express from "express";
 import aroundRouter from "./src/around/route.js";
 import aegisData from "./src/Aegis/routesAegis.js"
 import { config } from "dotenv";
+import { initDB } from "./src/db/db.js";
 config();
 
 // Initialize the Express app
@@ -19,9 +20,9 @@ app.use("/aegis", aegisData);
 // app.get("/api", (req, res) => {
 //   res.json({ message: "Hello from the API!" });
 // });
-
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
+const PORT = process.env.PORT || 3000;
+initDB().then(() => {
+	app.listen(PORT, () => {
+		console.log(`Server is running on port ${PORT}`);
+	});
 });
