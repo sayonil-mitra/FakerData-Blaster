@@ -72,7 +72,6 @@ export async function generateDataForIzak(
   }
 
   // Step 4: Generate security alerts and link to homeowners
-  console.log(data)
   data.devices.forEach((device) => {
     for (let i = 0; i < incrementEachLevel; i++) {
       const alert = createSecurityAlert(device.device_id, purgeId);
