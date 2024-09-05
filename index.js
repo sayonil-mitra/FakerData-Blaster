@@ -17,10 +17,6 @@ app.get("/test", (req, res) => {
 app.use("/around", aroundRouter);
 app.use("/izak", izakRouter);
 
-// Define another route
-// app.get("/api", (req, res) => {
-//   res.json({ message: "Hello from the API!" });
-// });
 const PORT = process.env.PORT || 3000;
 initDB().then(() => {
 	app.listen(PORT, () => {

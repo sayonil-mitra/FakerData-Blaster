@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { generateHomeAutomationData } from "./controller.js";
+import { generateDataForIzak } from "./controller.js";
 
 // Create a new router instance
 const router = Router();
@@ -16,10 +16,11 @@ router.post("/", async (req, res) => {
     }
 
     // Call the function to process the data
-    await generateHomeAutomationData(totalCount, incrementEachLevel, purgeId);
+    let responseData = await generateDataForIzak(totalCount, incrementEachLevel, purgeId);
 
     // Respond with success
-    res.status(200).json({ message: "Success: Izak synthetic data generated!" });
+    // res.status(200).json({ message: "Success: Izak synthetic data generated!" });
+    res.status(200).json(responseData);
   } catch (error) {
     // Catch and handle any errors
     console.error("Error occurred:", error);

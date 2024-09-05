@@ -15,7 +15,7 @@ import {
 import { getRandomNumber } from "../faker/faker.js";
 import fs from "fs/promises";
 
-export async function generateHomeAutomationData(
+export async function generateDataForIzak(
   totalCount = 1000,
   incrementEachLevel = 3,
   purgeId = 1
@@ -43,7 +43,7 @@ export async function generateHomeAutomationData(
   }
 
   // Step 2: Generate devices and features
-  for (let i = 0; i < parseInt(totalCount / 2); i++) {
+  for (let i = 0; i < parseInt(totalCount); i++) {
     const device = createDevice(purgeId);
     data.devices.push(device);
 
@@ -55,7 +55,7 @@ export async function generateHomeAutomationData(
   }
 
   // Step 3: Generate automation playbooks and link devices to playbooks
-  for (let i = 0; i < parseInt(totalCount / 3); i++) {
+  for (let i = 0; i < parseInt(totalCount); i++) {
     const playbook = createAutomationPlaybook(purgeId);
     data.automationPlaybooks.push(playbook);
 
@@ -133,7 +133,7 @@ export async function generateHomeAutomationData(
     }
   });
 
-  await fs.writeFile("data.json", JSON.stringify(data, null, 2));
+  //   await fs.writeFile("data.json", JSON.stringify(data, null, 2));
 
-  //   return data;
+  return data;
 }
