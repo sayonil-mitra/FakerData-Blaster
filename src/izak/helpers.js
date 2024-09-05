@@ -6,13 +6,13 @@ const createHomeowner = (purgeId) => ({
   name: faker.person.fullName(),
   email: faker.internet.email(),
   phone: faker.phone.number(),
-  address: {
+  address: JSON.stringify({
     street: faker.location.streetAddress(),
     city: faker.location.city(),
     state: faker.location.state(),
     country: faker.location.country(),
     postalCode: faker.location.zipCode(),
-  },
+  }),
   purge_id: purgeId,
 });
 
