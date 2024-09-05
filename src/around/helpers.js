@@ -1,4 +1,5 @@
 import { faker } from "../faker/faker.js";
+import { eventNames } from "./event-names.js";
 
 const createUser = () => ({
 	user_id: faker.string.uuid(),
@@ -34,6 +35,7 @@ const createEvent = (userId, locationId, organizerId) => ({
 	user_id: userId,
 	location_id: locationId,
 	organizer_id: organizerId,
+	event_name: faker.random.arrayElement(eventNames),
 });
 
 // Alert Entity Generator
@@ -143,6 +145,7 @@ const createGasStation = (userId, locationId) => ({
 	user_id: userId,
 	check_time: faker.date.recent(),
 	location_id: locationId,
+	gas_station_name: faker.company.name(),
 });
 
 export {
