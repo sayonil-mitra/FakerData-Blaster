@@ -7,23 +7,53 @@ import { purgeNames } from "../helpers/purge-names.js";
 
 const router = Router();
 
-router.post("/ingest", (req, res) => {
-	const purge = req.query.purge === "true";
-	const firstLevel = parseInt(req.query.firstLevel) || 1000;
-	const incrementOnEachLevel = parseInt(req.query.incrementOnEachLevel) || 5;
+router.post("/ingest", async (req, res) => {
+	try {
+		const purge = req.query.purge === "true";
+		const firstLevel = parseInt(req.query.firstLevel) || 1000;
+		const incrementOnEachLevel =
+			parseInt(req.query.incrementOnEachLevel) || 5;
 
-	const purgeId = addPurgeId(purgeNames.AROUND);
-	const data = generateData(purgeId, firstLevel, incrementOnEachLevel);
+		const purgeId = await addPurgeId(purgeNames.AROUND);
+		const data = generateData(purgeId, firstLevel, incrementOnEachLevel);
+		const keys = [...Object.keys(data)];
 
-	const ingestionPromises = [];
+		const ingestionPromises = [];
 
-	Object.keys(data).forEach((key) => {
-		ingestionPromises.push(ingestInSchema(schemas[key], data[key]));
-	});
+		keys.forEach((key) => {
+			ingestionPromises.push(ingestInSchema(schemas[key], data[key]));
+		});
 
-	const ingestionResponses = Promise.allSettled(ingestionPromises);
+		const ingestionResponses = await Promise.allSettled(ingestionPromises);
 
-	res.json(ingestionResponses);
+		const results = {
+			success: [],
+			failed: [],
+			purgeId,
+		};
+
+		ingestionResponses.forEach((result) => {
+			if (result.status === "fulfilled") {
+				const { schemaID, succeededCount } = result.value.data;
+
+				results.success.push({
+					schemaId: schemaID,
+					succeededCount: succeededCount,
+				});
+			} else {
+				results.failed.push({
+					error: result.reason,
+				});
+			}
+		});
+
+		res.json(results);
+	} catch (error) {
+		res.status(500).json({
+			status: "Failed",
+			errorMessage: error.message,
+		});
+	}
 });
 
 export default router;
