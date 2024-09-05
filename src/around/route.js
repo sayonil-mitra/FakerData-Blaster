@@ -54,9 +54,9 @@ router.post("/ingest", async (req, res) => {
 
 		const results = await ingestHandler(firstLevel, incrementOnEachLevel);
 
-		res.json(results);
+		return res.json(results);
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			status: "Failed",
 			errorMessage: error.message,
 		});
@@ -71,7 +71,7 @@ const purgeHandler = async (purgeId) => {
 		purgePromises.push(deleteData(schemas[key], purgeId));
 	});
 
-	const purgeResponses = await Promise.allSettled(ingestionPromises);
+	const purgeResponses = await Promise.allSettled(purgePromises);
 
 	const results = {
 		success: [],
@@ -99,10 +99,10 @@ const purgeHandler = async (purgeId) => {
 
 router.post("/purge", async (req, res) => {
 	try {
-		const purgeId = getFirstPurgeId(purgeNames.AROUND);
+		const purgeId = await getFirstPurgeId(purgeNames.AROUND);
 
 		if (!purgeId) {
-			res.status(404).json({
+			return res.status(404).json({
 				status: false,
 				message: "No purgeId found for around",
 			});
@@ -112,9 +112,9 @@ router.post("/purge", async (req, res) => {
 
 		await removePurgeId(purgeId);
 
-		res.json(results);
+		return res.json(results);
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			status: "Failed",
 			errorMessage: error.message,
 		});

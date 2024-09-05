@@ -56,6 +56,7 @@ async function removePurgeId(purgeId) {
 		if (!purgeId) {
 			return null;
 		}
+		const db = await dbPromise;
 
 		const record = await db.get(
 			`SELECT purge_id FROM purge_cache WHERE purge_id = ?`,

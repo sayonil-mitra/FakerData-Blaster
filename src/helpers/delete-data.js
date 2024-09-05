@@ -11,7 +11,7 @@ export function deleteData(schemaId, purgeId) {
 	return api.delete(
 		`/tf-entity-ingestion/v1.0/schemas/${schemaId}/instances`,
 		{
-			purge_id: purgeId,
+			data: { purge_id: purgeId },
 		}
 	);
 }
