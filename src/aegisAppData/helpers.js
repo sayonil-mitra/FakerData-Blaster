@@ -13,7 +13,7 @@ const createCameraData = (purgeId) => ({
   ]),
   camera_pincode: faker.location.zipCode(),
   camera_area: faker.location.street(),
-  camera_pinned: faker.datatype.boolean(),
+  camera_pinned: false,
   coordinates: {
     coordinates: faker.location.nearbyGPSCoordinate({
       origin: [23.0225, 72.5714],
@@ -22,7 +22,7 @@ const createCameraData = (purgeId) => ({
     }),
   },
   language: faker.helpers.arrayElement(["en"]),
-  cityname: faker.location.city(),
+  cityname: faker.helpers.arrayElement(["ahmedabad"]),
   purge_id: purgeId,
 });
 
@@ -33,16 +33,8 @@ const createCMSData = (purgeId) => ({
   media_url: faker.internet.url(),
   media_type: faker.helpers.arrayElement(["image", "video", "audio"]),
   media_title: faker.lorem.words(3),
-  language: faker.helpers.arrayElement([
-    "en",
-    "hi",
-    "te",
-    "ml",
-    "kn",
-    "gu",
-    "ta",
-  ]),
-  cityname: faker.location.city(),
+  language: faker.helpers.arrayElement(["en"]),
+  cityname: faker.helpers.arrayElement(["ahmedabad"]),
   purge_id: purgeId,
 });
 
@@ -51,27 +43,24 @@ const createFirstResponderData = (purgeId) => ({
   fr_id: faker.string.uuid(),
   name: faker.person.fullName(),
   officer_id: faker.string.uuid(),
-  type: faker.helpers.arrayElement(["Firefighter", "Police", "Paramedic"]),
-  category: faker.helpers.arrayElement(["Primary", "Secondary", "Support"]),
+  type: faker.helpers.arrayElement(["ems", "fire_services", "law_enforcement"]),
+  category: faker.helpers.arrayElement(["SWAT", "Patrol"]),
   speed: getRandomNumber(10, 120) + " km/h",
   ETA: faker.date.future().toISOString(),
-  status: faker.helpers.arrayElement(["En Route", "On Scene", "Completed"]),
+  status: faker.helpers.arrayElement(["patrolling"]),
   assets: {
-    vehicle: faker.vehicle.vehicle(),
-    equipment: faker.helpers.arrayElement([
-      "Aerial Surveillance Equipment",
-      "Baton",
-      "Body Armor",
-      "Breaching Tools",
-      "Dog Handling Equipment",
-      "First Aid Kits",
-      "Handcuffs",
-      "Handguns",
-      "Shields",
-      "Water Rescue Gear",
-      "bodyCam",
-      "fpvCam",
-    ]),
+    "Aerial Surveillance Equipment": faker.datatype.boolean(),
+    "Baton": faker.datatype.boolean(),
+    "Body Armor": faker.datatype.boolean(),
+    "Breaching Tools": faker.datatype.boolean(),
+    "Dog Handling Equipment": faker.datatype.boolean(),
+    "First Aid Kits": faker.datatype.boolean(),
+    "Handcuffs": faker.datatype.boolean(),
+    "Handguns": faker.datatype.boolean(),
+    "Shields": faker.datatype.boolean(),
+    "Water Rescue Gear": faker.datatype.boolean(),
+    "bodyCam": faker.datatype.boolean(),
+    "fpvCam": faker.datatype.boolean(),
   },
   current_coordinates: {
     coordinates: faker.location.nearbyGPSCoordinate({
@@ -81,18 +70,12 @@ const createFirstResponderData = (purgeId) => ({
     }),
   },
   incident_coordinates: {
-    coordinates:[]
+    coordinates: [],
   },
   language: faker.helpers.arrayElement([
-    "en",
-    "hi",
-    "te",
-    "ml",
-    "kn",
-    "gu",
-    "ta",
+    "en"
   ]),
-  cityname: faker.location.city(),
+  cityname: faker.helpers.arrayElement(["ahmedabad"]),
   purge_id: purgeId,
 });
 
@@ -108,16 +91,8 @@ const createEvacuationCenters = (purgeId) => ({
       isMetric: true,
     }),
   },
-  language: faker.helpers.arrayElement([
-    "en",
-    "hi",
-    "te",
-    "ml",
-    "kn",
-    "gu",
-    "ta",
-  ]),
-  cityname: faker.location.city(),
+  language: faker.helpers.arrayElement(["en"]),
+  cityname: faker.helpers.arrayElement(["ahmedabad"]),
   purge_id: purgeId,
 });
 
@@ -170,51 +145,6 @@ const createCivilianChat = (purgeId) => ({
 });
 
 ////Incident Generator
-// const createIncident = (purgeId) => ({
-//   incident_id: faker.number.int(),
-//   incident_name: faker.lorem.words(3),
-//   incident_type: JSON.stringify({
-//     name: faker.helpers.arrayElement([
-//       "FRW-Fire Warning",
-//       "Earthquake Warning",
-//       "Child-Abduction",
-//       "accident",
-//     ]),
-//     type: faker.helpers.arrayElement([
-//       "Natural Disaster",
-//       "Missing Persons",
-//       "Public Health Emergencies",
-//       "Others",
-//     ]),
-//   }),
-//   incident_coordinates: {
-//     coordinates: [faker.location.latitude(), faker.location.longitude()],
-//   },
-//   incident_affected_area: JSON.stringify({
-//     radius: faker.number.float({ min: 0.5, max: 10, precision: 0.1 }),
-//     unit: "km",
-//   }),
-//   location: faker.location.streetAddress(),
-//   issuing_authority: faker.person.fullName(),
-//   description: faker.lorem.paragraph(),
-//   status: faker.helpers.arrayElement([
-//     "active",
-//     "inactive",
-//     "under investigation",
-//   ]),
-//   officerIncharge: faker.person.fullName(),
-//   severity: faker.helpers.arrayElement(["low", "moderate", "high", "critical"]),
-//   latest_report: faker.lorem.sentence(),
-//   date: faker.date.anytime().toISOString().split("T")[0],
-//   time: faker.date.recent(),
-//   incidentInformation: JSON.stringify({
-//     report_id: faker.string.uuid(),
-//     details: faker.lorem.sentences(2),
-//   }),
-//   language: faker.helpers.arrayElement(["en"]),
-//   cityname: faker.location.city(),
-//   purge_id: purgeId,
-// });
 
 const createIncident = (purgeId) => {
   let coordinates = faker.location.nearbyGPSCoordinate({
@@ -288,7 +218,7 @@ const createIncident = (purgeId) => {
     status: faker.helpers.arrayElement([
       "active",
       "inactive",
-      "under investigation",
+      "investigation",
     ]),
     officerIncharge: faker.person.fullName(),
     severity: faker.helpers.arrayElement([
@@ -317,7 +247,7 @@ const createIncident = (purgeId) => {
       status: faker.helpers.arrayElement(["65%", "70%", "80%", "90%"]),
     },
     language: faker.helpers.arrayElement(["en"]),
-    cityname: faker.location.city(),
+    cityname: faker.helpers.arrayElement(["ahmedabad"]),
     purge_id: purgeId,
   };
 };
