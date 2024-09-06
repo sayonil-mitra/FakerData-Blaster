@@ -81,9 +81,9 @@ const ingestHandler = async (firstLevel, incrementOnEachLevel) => {
 router.post("/ingest", async (req, res) => {
 	try {
 		const purge = req.query.purge === "true";
-		const firstLevel = parseInt(req.query.firstLevel) || 10;
+		const firstLevel = parseInt(req.query.firstLevel) || 1000;
 		const incrementOnEachLevel =
-			parseInt(req.query.incrementOnEachLevel) || 1;
+			parseInt(req.query.incrementOnEachLevel) || 5;
 
 		const results = await ingestHandler(firstLevel, incrementOnEachLevel);
 
@@ -133,6 +133,29 @@ const purgeHandler = async (purgeId) => {
 router.post("/purge", async (req, res) => {
 	try {
 		const purgeId = await getFirstPurgeId(purgeNames.AEGIS);
+
+		if (!purgeId) {
+			return res.status(404).json({
+				status: false,
+				message: "No purgeId found for aegis",
+			});
+		}
+
+		const results = await purgeHandler(purgeId);
+
+		await removePurgeId(purgeId);
+
+		return res.json(results);
+	} catch (error) {
+		return res.status(500).json({
+			status: "Failed",
+			errorMessage: error.message,
+		});
+	}
+});
+router.post("/purge/:purgeId", async (req, res) => {
+	try {
+		const { purgeId } = req.params;
 
 		if (!purgeId) {
 			return res.status(404).json({

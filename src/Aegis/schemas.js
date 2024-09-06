@@ -1,17 +1,17 @@
 export const schemas = {
-    incidents: "66d9cc49f604240f9640459f",
-    tasks: "66d9ccdf4006bd33cd1a3768",
-    responders: "66d9ce34f604240f964045a0",
-    civilians: "66d9ced9f604240f964045a1",
-    nocs: "66d9cfb24006bd33cd1a3769",
-    vehicles: "66d9d01f4006bd33cd1a376a",
-    resources: "66d9d0734006bd33cd1a376b",
-    emergencyTeams: "66d9d0c0f604240f964045a2",
-    communicationLogs: "66d9d165f604240f964045a3",
-    safetyAlerts: "66d9d1af4006bd33cd1a376c",
-    incidentLogs: "66d9d2554006bd33cd1a376e"
-
+    incidents: "66dade864006bd33cd1a37a3",
+    tasks: "66dadf0f4006bd33cd1a37a4",
+    responders: "66dadf604006bd33cd1a37a5",
+    civilians: "66dadfae4006bd33cd1a37a6",
+    nocs: "66dadfee4006bd33cd1a37a7",
+    vehicles: "66dae0234006bd33cd1a37a8",
+    resources: "66dae0684006bd33cd1a37a9",
+    emergencyTeams: "66dae0964006bd33cd1a37aa",
+    communicationLogs: "66dae0d74006bd33cd1a37ab",
+    safetyAlerts: "66dae1194006bd33cd1a37ac",
+    incidentLogs: "66dae1644006bd33cd1a37ad"
 };
+
 
 // users: "66d9ef0d4006bd33cd1a3772",
 // 	events: "66d9eef5f604240f964045a8",
