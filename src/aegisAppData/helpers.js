@@ -145,7 +145,6 @@ const createCivilianChat = (purgeId) => ({
 });
 
 ////Incident Generator
-
 const createIncident = (purgeId) => {
   let coordinates = faker.location.nearbyGPSCoordinate({
     origin: [23.0225, 72.5714],
