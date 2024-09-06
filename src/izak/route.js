@@ -10,12 +10,12 @@ const router = Router();
 
 const ingestHandler = async (firstLevel, incrementOnEachLevel) => {
   const purgeId = await addPurgeId(purgeNames.IZAK);
-  const data = generateDataForIzak(firstLevel, incrementOnEachLevel, purgeId);
+  const data = await generateDataForIzak(firstLevel, incrementOnEachLevel, purgeId);
   const keys = [...Object.keys(data)];
-  console.log(data);
   const ingestionPromises = [];
 
   keys.forEach((key) => {
+    console.log(key,schemas[key])
     ingestionPromises.push(ingestInSchema(schemas[key], data[key]));
   });
 
