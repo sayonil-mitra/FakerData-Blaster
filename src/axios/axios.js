@@ -11,4 +11,34 @@ const api = axios.create({
 	},
 });
 
+// Request interceptor
+api.interceptors.request.use(
+	(config) => {
+		console.log(
+			`Outgoing request: ${config.method.toUpperCase()} ${config.url}`
+		);
+		return config;
+	},
+	(error) => {
+		console.error("Request error:", error);
+		return Promise.reject(error);
+	}
+);
+
+// Response interceptor
+api.interceptors.response.use(
+	(response) => {
+		console.log(
+			"Response ",
+			response.status,
+			` from: ${response.config.url}`
+		);
+		return response;
+	},
+	(error) => {
+		console.error("Response error:", error);
+		return Promise.reject(error);
+	}
+);
+
 export default api;
