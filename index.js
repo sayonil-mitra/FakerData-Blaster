@@ -1,15 +1,17 @@
 import express from "express";
 import aroundRouter from "./src/around/route.js";
-import aegisData from "./src/Aegis/routesAegis.js"
+import aegisData from "./src/Aegis/routesAegis.js";
 import izakRouter from "./src/izak/route.js";
 import aegisDataRouter from "./src/aegisAppData/routes.js"
 import { config } from "dotenv";
 import { initDB } from "./src/db/db.js";
+import morgan from "morgan";
 config();
 
 // Initialize the Express app
 const app = express();
-app.use(express.json())
+app.use(express.json());
+app.use(morgan("combined"));
 
 // Define a simple route
 app.get("/test", (req, res) => {

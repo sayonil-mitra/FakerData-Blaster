@@ -153,5 +153,28 @@ router.post("/purge", async (req, res) => {
 		});
 	}
 });
+router.post("/purge/:purgeId", async (req, res) => {
+	try {
+		const { purgeId } = req.params;
+
+		if (!purgeId) {
+			return res.status(404).json({
+				status: false,
+				message: "No purgeId found for aegis",
+			});
+		}
+
+		const results = await purgeHandler(purgeId);
+
+		await removePurgeId(purgeId);
+
+		return res.json(results);
+	} catch (error) {
+		return res.status(500).json({
+			status: "Failed",
+			errorMessage: error.message,
+		});
+	}
+});
 
 export default router;
