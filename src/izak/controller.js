@@ -104,7 +104,7 @@ export async function generateDataForIzak(
   });
 
   // Step 6: Generate energy playbooks and link devices to energy playbooks
-  for (let i = 0; i < parseInt(totalCount / 4); i++) {
+  for (let i = 0; i < parseInt(totalCount); i++) {
     const energyPlaybook = createEnergyPlaybook(purgeId);
     data.energyPlaybooks.push(energyPlaybook);
 
