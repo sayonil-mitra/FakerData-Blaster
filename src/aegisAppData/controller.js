@@ -3,13 +3,16 @@ import {
   createFirstResponderData,
   createCMSData,
   createEvacuationCenters,
+  createLog,
+  createIncident,
+  createCivilianChat,
+  createFrsChat,
 } from "./helpers.js";
-import { getRandomNumber } from "../faker/faker.js";
 
-export function generateData(
+export function generateAegisAppData(
   purgeId,
-  totalCount = 1000,
-  incrementEachLevel = 5
+  totalCount = 100,
+  incrementEachLevel = 2
 ) {
   // Initialize data storage
   const data = {
@@ -17,6 +20,10 @@ export function generateData(
     firstResponders: [],
     cmsData: [],
     evacuationCenters: [],
+    incidents: [],
+    firstResponderChats: [],
+    civilianChats: [],
+    logs: [],
   };
 
   // Step 1: Generate camera data
@@ -37,36 +44,34 @@ export function generateData(
     data.cmsData.push(cms);
   }
 
-  // Step 4: Generate evacuation centers data
+  // Step 4: Generate evacuation centers
   for (let i = 0; i < totalCount; i++) {
     const evacuationCenter = createEvacuationCenters(purgeId);
     data.evacuationCenters.push(evacuationCenter);
   }
 
- 
-  data.cameras.forEach((camera) => {
-    for (let i = 0; i < incrementEachLevel; i++) {
-     
-    }
-  });
+  // Step 5: Generate incidents and related data (Logs, First Responder Chat, Civilian Chat)
+  for (let i = 0; i < totalCount; i++) {
+    const incident = createIncident(purgeId);
+    data.incidents.push(incident);
 
-  data.firstResponders.forEach((firstResponder) => {
-    for (let i = 0; i < incrementEachLevel; i++) {
-      
-    }
-  });
+    for (let j = 0; j < incrementEachLevel; j++) {
+      // Generate incident logs
+      const log = createLog(purgeId);
+      log.incident_id = incident.incident_id;
+      data.logs.push(log);
 
-  data.cmsData.forEach((cms) => {
-    for (let i = 0; i < incrementEachLevel; i++) {
-      
-    }
-  });
+      // Generate First Responder Chats
+      const frsChat = createFrsChat(purgeId);
+      frsChat.incident_id = incident.incident_id;
+      data.firstResponderChats.push(frsChat);
 
-  data.evacuationCenters.forEach((center) => {
-    for (let i = 0; i < incrementEachLevel; i++) {
-      
+      // Generate Civilian Chats
+      const civilianChat = createCivilianChat(purgeId);
+      civilianChat.incident_id = incident.incident_id;
+      data.civilianChats.push(civilianChat);
     }
-  });
+  }
 
   return data;
 }

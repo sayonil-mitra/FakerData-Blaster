@@ -1,5 +1,6 @@
 export const purgeNames = {
   AROUND: "AROUND",
   IZAK: "IZAK",
-  AEGIS:"AEGIS"
+  AEGIS: "AEGIS",
+  AEGISAPPDATA: "AEGISAPPDATA"
 };

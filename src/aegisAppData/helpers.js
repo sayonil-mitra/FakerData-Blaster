@@ -1,4 +1,4 @@
-import { faker } from "../faker/faker.js";
+import { faker, getRandomNumber } from "../faker/faker.js";
 import { camera_imageurls, camera_videourls } from "./cam_images_videos.js";
 
 const createCameraData = (purgeId) => ({
@@ -12,11 +12,14 @@ const createCameraData = (purgeId) => ({
     "Street",
   ]),
   camera_pincode: faker.location.zipCode(),
-  camera_area: faker.location.streetName(),
+  camera_area: faker.location.street(),
   camera_pinned: faker.datatype.boolean(),
   coordinates: {
-    latitude: faker.location.latitude(),
-    longitude: faker.location.longitude(),
+    coordinates: faker.location.nearbyGPSCoordinate({
+      origin: [23.0225, 72.5714],
+      radius: 5,
+      isMetric: true,
+    }),
   },
   language: faker.helpers.arrayElement(["en"]),
   cityname: faker.helpers.arrayElement(["ahmedabad"]),
@@ -50,7 +53,7 @@ const createFirstResponderData = (purgeId) => ({
   officer_id: faker.string.uuid(),
   type: faker.helpers.arrayElement(["Firefighter", "Police", "Paramedic"]),
   category: faker.helpers.arrayElement(["Primary", "Secondary", "Support"]),
-  speed: faker.random.numeric(2) + " km/h",
+  speed: getRandomNumber(10, 120) + " km/h",
   ETA: faker.date.future().toISOString(),
   status: faker.helpers.arrayElement(["En Route", "On Scene", "Completed"]),
   assets: {
@@ -71,12 +74,14 @@ const createFirstResponderData = (purgeId) => ({
     ]),
   },
   current_coordinates: {
-    latitude: faker.location.latitude(),
-    longitude: faker.location.longitude(),
+    coordinates: faker.location.nearbyGPSCoordinate({
+      origin: [23.0225, 72.5714],
+      radius: 5,
+      isMetric: true,
+    }),
   },
   incident_coordinates: {
-    latitude: faker.location.latitude(),
-    longitude: faker.location.longitude(),
+    coordinates: [],
   },
   language: faker.helpers.arrayElement([
     "en",
@@ -94,11 +99,14 @@ const createFirstResponderData = (purgeId) => ({
 //EvacuationCenters Generator
 const createEvacuationCenters = (purgeId) => ({
   center_id: faker.string.uuid(),
-  center_name: faker.company.companyName(),
+  center_name: faker.company.name(),
   location: faker.location.streetAddress(),
   current_coordinates: {
-    latitude: faker.location.latitude(),
-    longitude: faker.location.longitude(),
+    coordinates: faker.location.nearbyGPSCoordinate({
+      origin: [23.0225, 72.5714],
+      radius: 5,
+      isMetric: true,
+    }),
   },
   language: faker.helpers.arrayElement(["en"]),
   cityname: faker.helpers.arrayElement(["ahmedabad"]),
@@ -111,7 +119,7 @@ const createLog = (purgeId) => ({
   sender_name: faker.person.fullName(),
   sender_id: faker.string.uuid(),
   sender_type: faker.helpers.arrayElement(["police", "civilian"]),
-  time: faker.time.recent(),
+  time: faker.date.recent(),
   date: faker.date.anytime().toISOString().split("T")[0],
   log_message: faker.lorem.sentence(),
   language: faker.helpers.arrayElement(["en"]),
@@ -124,7 +132,7 @@ const createFrsChat = (purgeId) => ({
   frschat_id: faker.string.uuid(),
   name: faker.person.fullName(),
   message: faker.lorem.sentence(),
-  time: faker.time.recent(),
+  time: faker.date.recent(),
   date: faker.date.anytime().toISOString().split("T")[0],
   responder_type: faker.helpers.arrayElement(["Fire fighter", "EMS", "police"]),
   responder_id: faker.string.uuid(),
@@ -132,7 +140,7 @@ const createFrsChat = (purgeId) => ({
   video: JSON.stringify([faker.image.url()]), // Example video URLs as JSON
   message_type: faker.helpers.arrayElement(["sender", "reciever"]),
   language: faker.helpers.arrayElement(["en"]),
-  incident_id: faker.number.int(),
+  incident_id: faker.string.uuid(),
   purge_id: purgeId,
 });
 
@@ -142,18 +150,19 @@ const createCivilianChat = (purgeId) => ({
   name: faker.person.fullName(),
   sender_type: faker.helpers.arrayElement(["civilian", "witness"]),
   message: faker.lorem.sentence(),
-  time: faker.time.recent(),
+  time: faker.date.recent(),
   date: faker.date.anytime().toISOString().split("T")[0],
   id: faker.string.uuid(),
   images: JSON.stringify([faker.image.url()]), // Example image URLs as JSON
   videos: JSON.stringify([faker.image.url()]), // Example video URLs as JSON
   message_type: faker.helpers.arrayElement(["sender", "reciever"]),
   language: faker.helpers.arrayElement(["en"]),
-  incident_id: faker.number.int(),
+  incident_id: faker.string.uuid(),
   purge_id: purgeId,
 });
 
 ////Incident Generator
+
 const createIncident = (purgeId) => {
   let coordinates = faker.location.nearbyGPSCoordinate({
     origin: [23.0225, 72.5714],
@@ -168,7 +177,8 @@ const createIncident = (purgeId) => {
       name: faker.helpers.arrayElement([
         "FRW-Fire Warning",
         "Earthquake Warning",
-        "Child-Abduction"
+        "Child-Abduction",
+        "accident",
       ]),
       type: faker.helpers.arrayElement([
         "Natural Disaster",
