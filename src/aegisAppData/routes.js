@@ -51,10 +51,10 @@ const ingestHandler = async (firstLevel, incrementOnEachLevel) => {
 };
 
 router.post("/ingest", async (req, res) => {
-  try {
+  try { 
     const purge = req.query.purge === "true";
-    const firstLevel = parseInt(req.query.firstLevel) || 5;
-    const incrementOnEachLevel = parseInt(req.query.incrementOnEachLevel) || 1;
+    const firstLevel = parseInt(req.query.firstLevel) || 1000;
+    const incrementOnEachLevel = parseInt(req.query.incrementOnEachLevel) || 5;
 
     const results = await ingestHandler(firstLevel, incrementOnEachLevel);
 

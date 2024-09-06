@@ -11,8 +11,8 @@ import {
 
 export function generateAegisAppData(
   purgeId,
-  totalCount = 100,
-  incrementEachLevel = 2
+  totalCount = 1000,
+  incrementEachLevel = 5
 ) {
   // Initialize data storage
   const data = {

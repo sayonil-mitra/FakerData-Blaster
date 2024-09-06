@@ -170,52 +170,6 @@ const createCivilianChat = (purgeId) => ({
 });
 
 ////Incident Generator
-// const createIncident = (purgeId) => ({
-//   incident_id: faker.number.int(),
-//   incident_name: faker.lorem.words(3),
-//   incident_type: JSON.stringify({
-//     name: faker.helpers.arrayElement([
-//       "FRW-Fire Warning",
-//       "Earthquake Warning",
-//       "Child-Abduction",
-//       "accident",
-//     ]),
-//     type: faker.helpers.arrayElement([
-//       "Natural Disaster",
-//       "Missing Persons",
-//       "Public Health Emergencies",
-//       "Others",
-//     ]),
-//   }),
-//   incident_coordinates: {
-//     coordinates: [faker.location.latitude(), faker.location.longitude()],
-//   },
-//   incident_affected_area: JSON.stringify({
-//     radius: faker.number.float({ min: 0.5, max: 10, precision: 0.1 }),
-//     unit: "km",
-//   }),
-//   location: faker.location.streetAddress(),
-//   issuing_authority: faker.person.fullName(),
-//   description: faker.lorem.paragraph(),
-//   status: faker.helpers.arrayElement([
-//     "active",
-//     "inactive",
-//     "under investigation",
-//   ]),
-//   officerIncharge: faker.person.fullName(),
-//   severity: faker.helpers.arrayElement(["low", "moderate", "high", "critical"]),
-//   latest_report: faker.lorem.sentence(),
-//   date: faker.date.anytime().toISOString().split("T")[0],
-//   time: faker.date.recent(),
-//   incidentInformation: JSON.stringify({
-//     report_id: faker.string.uuid(),
-//     details: faker.lorem.sentences(2),
-//   }),
-//   language: faker.helpers.arrayElement(["en"]),
-//   cityname: faker.location.city(),
-//   purge_id: purgeId,
-// });
-
 const createIncident = (purgeId) => {
   let coordinates = faker.location.nearbyGPSCoordinate({
     origin: [23.0225, 72.5714],
