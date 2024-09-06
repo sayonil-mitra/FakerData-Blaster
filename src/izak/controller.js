@@ -16,9 +16,9 @@ import { getRandomNumber } from "../faker/faker.js";
 import fs from "fs/promises";
 
 export async function generateDataForIzak(
-  totalCount = 1000,
-  incrementEachLevel = 3,
-  purgeId = 1
+  totalCount,
+  incrementEachLevel,
+  purgeId
 ) {
   // Initialize data storage
   const data = {
@@ -133,7 +133,7 @@ export async function generateDataForIzak(
     }
   });
 
-  //   await fs.writeFile("data.json", JSON.stringify(data, null, 2));
+    // await fs.writeFile("data.json", JSON.stringify(data, null, 2));
 
   return data;
 }
