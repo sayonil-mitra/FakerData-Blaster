@@ -16,7 +16,8 @@ let randomStepMitigationPlan = faker.helpers.arrayElements(
   plan_description,
   30
 );
- 
+const years = [2020, 2021, 2022, 2023, 2024];
+
 // Vision2030 Entity Generator
 const createVision2030 = (purgeId) => ({
   vision2030Id: faker.string.uuid(),
@@ -55,7 +56,7 @@ const createEducationalGoals = (purgeId) => ({
   description: faker.helpers.arrayElement(randomEducationalGoals).description,
   target_value: faker.number.float({ min: 0, max: 100 }),
   purge_id: purgeId,
-  goalRiskIndicatorId:faker.string.uuid(),
+  goalRiskIndicatorId: faker.string.uuid(),
 });
 
 // PerformanceMetrics Entity Generator
@@ -185,7 +186,7 @@ const createSTEMBenchmarkingData = (stemPerformanceMetricId, purgeId) => ({
   stemBenchmarkingDataId: faker.string.uuid(),
   stemPerformanceMetricId: stemPerformanceMetricId,
   benchmark_value: faker.number.float({ min: 0, max: 100 }),
-  year: faker.date.past().getFullYear(),
+  year: faker.helpers.arrayElement(years),
   purge_id: purgeId,
 });
 

@@ -62,7 +62,7 @@ export async function generateDataForVision2030(
       data.educationalGoals.push(educationalGoal);
 
       // Generate Performance Metrics for each Educational Goal
-      for (let j = 0; j < incrementEachLevel; j++) {
+      for (let j = 0; j < parseInt(incrementEachLevel / 2); j++) {
         const performanceMetric = createPerformanceMetrics(
           educationalGoal.educationalGoalId,
           purgeId
@@ -70,7 +70,7 @@ export async function generateDataForVision2030(
         data.performanceMetrics.push(performanceMetric);
 
         // Generate OKR Tracking for each Performance Metric
-        for (let k = 0; k < incrementEachLevel; k++) {
+        for (let k = 0; k < parseInt(incrementEachLevel / 3); k++) {
           const okrTracking = createOKRTracking(
             performanceMetric.performanceMetricId,
             purgeId
@@ -79,7 +79,7 @@ export async function generateDataForVision2030(
         }
 
         // Generate Goal Risk Indicators for each Performance Metric
-        for (let l = 0; l < incrementEachLevel; l++) {
+        for (let l = 0; l < parseInt(incrementEachLevel / 3); l++) {
           const goalRiskIndicator = createGoalRiskIndicators(
             performanceMetric.performanceMetricId,
             purgeId
@@ -117,7 +117,7 @@ export async function generateDataForVision2030(
         data.competitivenessMetrics.push(competitivenessMetric);
 
         // Generate Benchmarking Data for each Competitiveness Metric
-        for (let k = 0; k < incrementEachLevel; k++) {
+        for (let k = 0; k < parseInt(incrementEachLevel / 3); k++) {
           const benchmarkingDataEntry = createBenchmarkingData(
             competitivenessMetric.competitivenessMetricId,
             purgeId
@@ -126,7 +126,7 @@ export async function generateDataForVision2030(
         }
 
         // Generate Competitiveness Risk Indicators
-        for (let l = 0; l < incrementEachLevel; l++) {
+        for (let l = 0; l < parseInt(incrementEachLevel / 3); l++) {
           const competitivenessRiskIndicator =
             createCompetitivenessRiskIndicators(
               competitivenessMetric.competitivenessMetricId,
@@ -135,7 +135,7 @@ export async function generateDataForVision2030(
           data.competitivenessRiskIndicators.push(competitivenessRiskIndicator);
 
           // Generate Mitigation Plans for each Competitiveness Risk Indicator
-          for (let m = 0; m < incrementEachLevel; m++) {
+          for (let m = 0; m < parseInt(incrementEachLevel / 3); m++) {
             const mitigationPlan = createMitigationPlans(
               competitivenessRiskIndicator.competitivenessRiskIndicatorId,
               purgeId
@@ -162,7 +162,7 @@ export async function generateDataForVision2030(
           data.stemPerformanceMetrics.push(stemPerformanceMetric);
 
           // Generate STEM Risk Indicators
-          for (let k = 0; k < incrementEachLevel; k++) {
+          for (let k = 0; k < parseInt(incrementEachLevel / 3); k++) {
             const stemRiskIndicator = createSTEMRiskIndicators(
               stemPerformanceMetric.stemPerformanceMetricId,
               purgeId
@@ -170,7 +170,7 @@ export async function generateDataForVision2030(
             data.stemRiskIndicators.push(stemRiskIndicator);
 
             // Generate STEM Mitigation Plans
-            for (let l = 0; l < incrementEachLevel; l++) {
+            for (let l = 0; l < parseInt(incrementEachLevel / 3); l++) {
               const stemMitigationPlan = createSTEMMitigationPlans(
                 stemRiskIndicator.stemRiskIndicatorId,
                 purgeId
@@ -180,7 +180,7 @@ export async function generateDataForVision2030(
           }
 
           // Generate STEM Benchmarking Data
-          for (let m = 0; m < incrementEachLevel; m++) {
+          for (let m = 0; m < parseInt(incrementEachLevel / 3); m++) {
             const stemBenchmarkingDataEntry = createSTEMBenchmarkingData(
               stemPerformanceMetric.stemPerformanceMetricId,
               purgeId
