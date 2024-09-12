@@ -1,0 +1,18 @@
+export const schemas = {
+  stemMitigationPlans: "66e30ad54006bd33cd1a37d7",
+  stemRiskIndicators: "66e30abff604240f964045fb",
+  stemCompetitivenesses: "66e30aaa4006bd33cd1a37d6",
+  riskMitigationActions: "66e339d3f604240f96404609",
+  goalRiskIndicators: "66e316764006bd33cd1a37dc",
+  globalCompetitivenesses: "66e30a98f604240f964045fa",
+  okrTrackings: "66e31ad3f604240f96404601",
+  performanceMetrics: "66e315bb4006bd33cd1a37db",
+  mitigationPlans: "66e33a28f604240f9640460a",
+  stemBenchmarkingData: "66e33a8d4006bd33cd1a37ee",
+  vision2030: "66e30a70f604240f964045f9",
+  competitivenessMetrics: "66e31831f604240f964045fe",
+  benchmarkingData: "66e30ae9f604240f964045fc",
+  stemPerformanceMetrics: "66e31a39f604240f96404600",
+  educationalGoals: "66e30a854006bd33cd1a37d5",
+  competitivenessRiskIndicators: "66e31965f604240f964045ff",
+};
