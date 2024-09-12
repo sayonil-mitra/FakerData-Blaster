@@ -33,16 +33,41 @@ export function generateAroundAppData(
   }
 
   // Step 2: Generate Gas Stations and Fuels
+//   for (let i = 0; i < totalCount; i++) {
+//     const gasStation = createGasStationData(purgeId);
+//     data.gasStations.push(gasStation);
+
+//     // Generate fuel data for each gas station
+//     // for (let j = 0; j < incrementEachLevel; j++) {
+//     //   const fuelData = createFuelData(purgeId, gasStation.station_id);
+//     //   data.fuels.push(fuelData);
+//     // //    data.fuels = data.fuels.concat(fuelDataArray);
+//     // }
+
+//     // Generate fuel data for each gas station
+//     for (let j = 0; j < incrementEachLevel; j++) {
+//       const fuelDataArray = createFuelData(purgeId, gasStation.station_id); // returns an array of fuel data
+
+//       // Push each fuel instance into the data.fuels array
+//       fuelDataArray.forEach((fuelData) => {
+//         data.fuels.push(fuelData); // Push individual fuel objects into the fuels array
+//       });
+//     }
+//   }
+
   for (let i = 0; i < totalCount; i++) {
     const gasStation = createGasStationData(purgeId);
     data.gasStations.push(gasStation);
 
-    // Generate fuel data for each gas station
-    for (let j = 0; j < incrementEachLevel; j++) {
-      const fuelData = createFuelData(purgeId, gasStation.station_id);
-      data.fuels.push(fuelData);
-    }
+    // Generate fuel data for each gas station, only once
+    const fuelDataArray = createFuelData(purgeId, gasStation.station_id); // returns an array of fuel data (2 to 4 products)
+
+    // Push each fuel instance into the data.fuels array
+    fuelDataArray.forEach((fuelData) => {
+      data.fuels.push(fuelData); // Push individual fuel objects into the fuels array
+    });
   }
+
 
   // Step 3: Generate Unemployment Data (City-wise)
   for (let i = 0; i < totalCount; i++) {
