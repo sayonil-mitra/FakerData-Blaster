@@ -287,6 +287,14 @@ export const gasStationNames = [
 ];
 
 
+export const gasStationslogos = [
+  "/images/IndianOilLogo.png",
+  "/svgs/shellLogo.svg",
+  "/images/HPLogo.png",
+  "/images/BharatPetroleumLogo.png",
+  "/svgs/ReliancePetroleum.svg",
+];
+
 export const model =[
   "mercedes-benz c-class (2019)",
   "bmw z4 (2023)",
@@ -302,19 +310,19 @@ export const model =[
   "mahindra scorpio n (2023)",
 ]
 
-export const vehicle_images=[
+export const vehicle_images = [
   "https://apollo.olx.in/v1/files/8v29mz4ox9fs1-IN/image;s=780x0;q=60",
   "https://apollo.olx.in/v1/files/453mtemxl0b43-IN/image;s=780x0;q=60",
-  "https://apollo.olx.in/v1/files/w9ytt80o25262-IN/image;s=1080x1080",
+  "https://de.academic.ru/pictures/dewiki/65/Audi_Q7_(Facelift)_front_20110115.jpg",
   "https://apollo.olx.in/v1/files/mci8oajzn5m01-IN/image;s=780x0;q=60",
   "https://apollo.olx.in/v1/files/k31ct53nig07-IN/image;s=780x0;q=60",
   "https://apollo.olx.in/v1/files/dno1sgkzsb8i1-IN/image;s=780x0;q=60",
-  "https://apollo.olx.in/v1/files/c0teax3qwao03-IN/image;s=780x0;q=60",
-  "https://apollo.olx.in/v1/files/woa45460g6xm2-IN/image;s=780x0;q=60",
+  "https://static0.topspeedimages.com/wordpress/wp-content/uploads/crop/200512/2003-audi-a6-older-18_1600x0w.jpg",
+  "https://cdni.autocarindia.com/autocar/fortuner1.jpg",
   "https://apollo.olx.in/v1/files/gvho32azo19o3-IN/image;s=780x0;q=60",
   "https://apollo.olx.in/v1/files/jfvl4rla78vd3-IN/image;s=780x0;q=60",
   "https://apollo.olx.in/v1/files/lhv9za8t9rz91-IN/image;s=780x0;q=60",
-  "https://apollo.olx.in/v1/files/5m7qpt9wqi7c2-IN/image;s=780x0;q=60"
+  "https://apollo.olx.in/v1/files/5m7qpt9wqi7c2-IN/image;s=780x0;q=60",
 ];
 
 export const sellers= [
