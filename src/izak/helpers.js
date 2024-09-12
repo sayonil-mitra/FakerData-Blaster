@@ -5,7 +5,7 @@ const createHomeowner = (purgeId) => ({
   homeowner_id: faker.string.uuid(),
   name: faker.person.fullName(),
   email: faker.internet.email(),
-  phone: faker.phone.number(),
+  phone: faker.phone.number({ style: 'national' }),
   address: JSON.stringify({
     street: faker.location.streetAddress(),
     city: faker.location.city(),

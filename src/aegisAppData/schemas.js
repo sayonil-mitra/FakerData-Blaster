@@ -5,6 +5,6 @@ export const schemas = {
   evacuationCenters: "66dad16cf604240f964045ce",
   incidents: "66dad1c6f604240f964045cf",
   logs: "66dad2def604240f964045d1",
-  firstResponderChats: "66dae6d94006bd33cd1a37ae",
+  firstResponderChats: "66dafc794006bd33cd1a37b2",
   civilianChats: "66dae7444006bd33cd1a37af",
 };
