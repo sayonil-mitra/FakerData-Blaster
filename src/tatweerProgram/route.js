@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ingestInSchema } from "../helpers/ingest-data.js";
 import { deleteData } from "../helpers/delete-data.js";
-import { generateDataForIzak } from "./controller.js";
+import { generateDataForTatweerProgram } from "./controller.js";
 import { schemas } from "./schemas.js";
 import { addPurgeId, getFirstPurgeId, removePurgeId } from "../db/db.js";
 import { purgeNames } from "../helpers/purge-names.js";
@@ -9,13 +9,13 @@ import { purgeNames } from "../helpers/purge-names.js";
 const router = Router();
 
 const ingestHandler = async (firstLevel, incrementOnEachLevel) => {
-  const purgeId = await addPurgeId(purgeNames.IZAK);
-  const data = await generateDataForIzak(firstLevel, incrementOnEachLevel, purgeId);
+  const purgeId = await addPurgeId(purgeNames.TATWEERPROGRAM);
+  const data = await generateDataForTatweerProgram(firstLevel, incrementOnEachLevel, purgeId);
   const keys = [...Object.keys(data)];
   const ingestionPromises = [];
 
   keys.forEach((key) => {
-    console.log(key, schemas[key], data[key])
+    console.log(key, schemas[key], data[key][0])
     ingestionPromises.push(ingestInSchema(schemas[key], data[key]));
   });
 
@@ -54,6 +54,7 @@ router.post("/ingest", async (req, res) => {
 
     return res.json(results);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: "Failed",
       errorMessage: error.message,
@@ -97,12 +98,12 @@ const purgeHandler = async (purgeId) => {
 
 router.post("/purge", async (req, res) => {
   try {
-    const purgeId = await getFirstPurgeId(purgeNames.IZAK);
+    const purgeId = await getFirstPurgeId(purgeNames.TATWEERPROGRAM);
 
     if (!purgeId) {
       return res.status(404).json({
         status: false,
-        message: "No purgeId found for izak",
+        message: "No purgeId found for Tatweer Program",
       });
     }
 
