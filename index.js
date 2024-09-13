@@ -4,8 +4,10 @@ import aegisData from "./src/Aegis/routesAegis.js";
 import izakRouter from "./src/izak/route.js";
 import aegisDataRouter from "./src/aegisAppData/routes.js";
 import vision2030Router from "./src/vision2030/route.js";
-import aroundDataRouter from "./src/aroundAPPData/routes.js"
-import moeDataRouter from "./src/minOfEdu/routesMOE.js"
+import aroundDataRouter from "./src/aroundAPPData/routes.js";
+import moeDataRouter from "./src/minOfEdu/routesMOE.js";
+import aroundDataRouter from "./src/aroundAPPData/routes.js";
+import tatweerProgramRouter from "./src/tatweerProgram/route.js";
 import { config } from "dotenv";
 import { initDB } from "./src/db/db.js";
 import morgan from "morgan";
@@ -27,7 +29,8 @@ app.use("/izak", izakRouter);
 app.use("/aegisAppData", aegisDataRouter);
 app.use("/vision2030", vision2030Router);
 app.use("/aroundAppData", aroundDataRouter);
-app.use("/moe",moeDataRouter)
+app.use("/moe", moeDataRouter);
+app.use("/tatweerProgram", tatweerProgramRouter);
 
 const PORT = process.env.PORT || 3000;
 initDB().then(() => {
