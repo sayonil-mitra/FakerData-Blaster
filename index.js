@@ -2,9 +2,10 @@ import express from "express";
 import aroundRouter from "./src/around/route.js";
 import aegisData from "./src/Aegis/routesAegis.js";
 import izakRouter from "./src/izak/route.js";
-import aegisDataRouter from "./src/aegisAppData/routes.js";
+import aegisDataRouter from "./src/aegisAppData/routes.js";;
 import vision2030Router from "./src/vision2030/route.js";
-import aroundDataRouter from "./src/aroundAPPData/routes.js"
+import aroundDataRouter from "./src/aroundAPPData/routes.js";
+import tatweerProgramRouter from "./src/tatweerProgram/route.js";
 import noorSystemDataRouter from "./src/Noor System/routes.js";
 import moeDataRouter from "./src/minOfEdu/routesMOE.js"
 import { config } from "dotenv";
@@ -28,6 +29,7 @@ app.use("/izak", izakRouter);
 app.use("/aegisAppData", aegisDataRouter);
 app.use("/vision2030", vision2030Router);
 app.use("/aroundAppData", aroundDataRouter);
+app.use("/tatweerProgram", tatweerProgramRouter);
 app.use("/noorSystemData", noorSystemDataRouter);
 app.use("/moe",moeDataRouter)
 
