@@ -8,6 +8,9 @@ import aroundDataRouter from "./src/aroundAPPData/routes.js";
 import tatweerProgramRouter from "./src/tatweerProgram/route.js";
 import noorSystemDataRouter from "./src/Noor System/routes.js";
 import moeDataRouter from "./src/minOfEdu/routesMOE.js"
+import schoolProgramRouter from "./src/School/routes.js"
+import contentProviderRouter from "./src/contentProvider/routes.js"
+import studentRouter from "./src/Student/routes.js"
 import { config } from "dotenv";
 import { initDB } from "./src/db/db.js";
 import morgan from "morgan";
@@ -32,6 +35,9 @@ app.use("/aroundAppData", aroundDataRouter);
 app.use("/tatweerProgram", tatweerProgramRouter);
 app.use("/noorSystemData", noorSystemDataRouter);
 app.use("/moe",moeDataRouter)
+app.use("/schoolProgram", schoolProgramRouter);
+app.use("/contentProvider", contentProviderRouter);
+app.use("/studentData", studentRouter);
 
 
 const PORT = process.env.PORT || 3000;
