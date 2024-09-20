@@ -4,7 +4,7 @@ config();
 
 // Create an axios instance with default settings
 const api = axios.create({
-	timeout: 600000,
+	timeout: 900000,
 	baseURL: process.env.PI_BASE_PATH,
 	headers: {
 		"Content-Type": "application/json",
