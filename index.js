@@ -11,6 +11,8 @@ import moeDataRouter from "./src/minOfEdu/routesMOE.js"
 import schoolProgramRouter from "./src/School/routes.js"
 import contentProviderRouter from "./src/contentProvider/routes.js"
 import studentRouter from "./src/Student/routes.js"
+import gujaratDataRouter from "./src/gujaratDataset/routes.js"
+import iZakDataRouter from "./src/iZakDataGujarat/routes.js"
 import { config } from "dotenv";
 import { initDB } from "./src/db/db.js";
 import morgan from "morgan";
@@ -38,9 +40,11 @@ app.use("/moe",moeDataRouter)
 app.use("/schoolProgram", schoolProgramRouter);
 app.use("/contentProvider", contentProviderRouter);
 app.use("/studentData", studentRouter);
+app.use("/gujaratData", gujaratDataRouter);
+app.use("/iZakData", iZakDataRouter);
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 initDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
