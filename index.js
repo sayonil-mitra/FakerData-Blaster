@@ -13,6 +13,7 @@ import contentProviderRouter from "./src/contentProvider/routes.js"
 import studentRouter from "./src/Student/routes.js"
 import gujaratDataRouter from "./src/gujaratDataset/routes.js"
 import iZakDataRouter from "./src/iZakDataGujarat/routes.js"
+import MenziesStaffDataRouter from "./src/Staff-Menzies/routes.js"
 import { config } from "dotenv";
 import { initDB } from "./src/db/db.js";
 import morgan from "morgan";
@@ -42,6 +43,7 @@ app.use("/contentProvider", contentProviderRouter);
 app.use("/studentData", studentRouter);
 app.use("/gujaratData", gujaratDataRouter);
 app.use("/iZakData", iZakDataRouter);
+app.use("/MenziesStaffData", MenziesStaffDataRouter);
 
 
 const PORT = process.env.PORT || 8000;
