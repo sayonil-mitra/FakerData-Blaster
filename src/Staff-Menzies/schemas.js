@@ -1,0 +1,25 @@
+export const schemas={
+  staff: "6707d3d3f6719a0a4db18bcd",
+    staffRoles: "6707d3d3b4751123fdc59283",
+    shiftAssignments: "6707d3d3b4751123fdc5927d",
+    certifications: "6707d3d3b4751123fdc5927f",
+    trainings: "6707d3d3f6719a0a4db18bcc",
+    groundMarshals: "6707d3d3b4751123fdc59280",
+    baggageHandlers: "6707d3d3f6719a0a4db18bc7",
+    cargoSupervisors: "6707d3d3b4751123fdc59281",
+    safetyOfficers: "6707d3d3f6719a0a4db18bc9",
+    shiftDurations:"6707d3d3b4751123fdc59282",
+    shiftStartTimes:"6707d3d3b4751123fdc5927b",
+    shiftBreakTimes:"6707d3d3b4751123fdc5927c",
+    shiftRotations: "6707d3d3f6719a0a4db18bce",
+    securityClearances: "6707d3d3b4751123fdc5927a",
+    equipmentOperationLicenses: "6707d3d3b4751123fdc5927e",
+    firstAidCertifications: "6707d3d3f6719a0a4db18bc8",
+    airsideDrivingPermits: "6707d3d3f6719a0a4db18bd0",
+    safetyTrainings: "6707d3d3b4751123fdc59284",
+    equipmentTrainings: "6707d3d3f6719a0a4db18bcf",
+    securityAwarenessTrainings: "6707d3d3f6719a0a4db18bcb",
+    emergencyResponseTrainings: "6707d3d3f6719a0a4db18bca",
+}
+
+
